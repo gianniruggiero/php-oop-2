@@ -1,15 +1,15 @@
 <?php
 
 class User {
-    public $name;
-    public $lastname;
-    public $age;
-    public $nationality;
-    public $genre;
-    public $email;
+    protected $name;
+    protected $lastname;
+    protected $age;
+    protected $nationality;
+    protected $genre;
+    protected $email;
     public $username;
-    public $password;
-    public $sconto;
+    private $password;
+    private $sconto;
 
     public function __construct ($_username, $_password, $_age) {
         $this->username = $_username;
@@ -23,6 +23,10 @@ class User {
         $this->nationality = $_nationality;
         $this->genre = $_genre;
         $this->email = $_email;
+    }
+
+    public function getUserData ($data) {
+        return $this->$data;
     }
 
     public function setSconto () {
@@ -40,9 +44,9 @@ class User {
 
 class BlogAuthor extends User {
     public $role;
-    public $postsNumber;
-    public $firstPostDate;
-    public $tags;
+    protected $postsNumber;
+    protected $firstPostDate;
+    protected $tags;
 
     public function setAuthordata ($_role, $_postsNumber, $_firstPostDate, $_tags) {
         $this->role = $_role;
@@ -108,7 +112,7 @@ $authors = [$author1, $author2, $author3];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <title>PHP-OOP-1</title>
+    <title>PHP-OOP-2</title>
 </head>
 <body>
     <main>
@@ -127,15 +131,15 @@ $authors = [$author1, $author2, $author3];
             </tr>
             <?php foreach ($utenti as $user) {?>
                 <tr>
-                    <td><?php echo $user->name ?></td>
-                    <td><?php echo $user->lastname ?></td>
-                    <td><?php echo $user->age ?></td>
-                    <td><?php echo $user->nationality ?></td>
-                    <td><?php echo $user->genre ?></td>
-                    <td><?php echo $user->email ?></td>
-                    <td><?php echo $user->username ?></td>
-                    <td><?php echo $user->password ?></td>
-                    <td><?php echo $user->sconto ?>%</td>
+                    <td><?php echo $user->getUserData("name") ?></td>
+                    <td><?php echo $user->getUserData("lastname") ?></td>
+                    <td><?php echo $user->getUserData("age")?></td>
+                    <td><?php echo $user->getUserData("nationality")?></td>
+                    <td><?php echo $user->getUserData("genre")?></td>
+                    <td><?php echo $user->getUserData("email")?></td>
+                    <td><?php echo $user->username?></td>
+                    <td><?php echo $user->getUserData("password")?></td>
+                    <td><?php echo $user->getUserData("sconto")?>%</td>
                 </tr>
             <?php }; ?>
         </table>
@@ -156,16 +160,16 @@ $authors = [$author1, $author2, $author3];
             </tr>
             <?php foreach ($authors as $author) {?>
                 <tr>
-                    <td><?php echo $author->name ?></td>
-                    <td><?php echo $author->lastname ?></td>
-                    <td><?php echo $author->age ?></td>
-                    <td><?php echo $author->nationality ?></td>
-                    <td><?php echo $author->genre ?></td>
-                    <td><?php echo $author->username ?></td>
+                    <td><?php echo $author->getUserData("name") ?></td>
+                    <td><?php echo $author->getUserData("lastname")?></td>
+                    <td><?php echo $author->getUserData("age")?></td>
+                    <td><?php echo $author->getUserData("nationality")?></td>
+                    <td><?php echo $author->getUserData("genre")?></td>
+                    <td><?php echo $author->username?></td>
                     <td><?php echo $author->role?></td>
-                    <td><?php echo $author->postsNumber?></td>
-                    <td><?php echo $author->firstPostDate?></td>
-                    <td><?php echo $author->tags?></td>
+                    <td><?php echo $author->getUserData("postsNumber")?></td>
+                    <td><?php echo $author->getUserData("firstPostDate")?></td>
+                    <td><?php echo $author->getUserData("tags")?></td>
                 </tr>
             <?php }; ?>
         </table>
